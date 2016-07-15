@@ -1,8 +1,3 @@
-/*
- Author Degtyarev Oleg w3Serif@gmail.com
- MIT licence
-*/
-
 var Matrix = (function(){
     // EXAMPLE:
     //      var arr = [0,0,0, 0,0,0, 0,0,3];
