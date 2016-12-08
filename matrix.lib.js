@@ -1,12 +1,18 @@
 var Matrix = (function(){
     // EXAMPLE:
     //      var arr = [0,0,0, 0,0,0, 0,0,3];
-    //      var someMatrix = new Matrix(arr,[3,3],'example');
-    function Matrix(matrix,dim,name){
+    //      var someMatrix = new Matrix(arr,[3,3],'example name');
+    function Matrix(matrix, dim, name){
         dim = dim || [1,matrix.length];
-        if (typeof dim == 'number'){var tmp=dim; dim=[]; dim[0]=dim[1]=tmp;}
-        if ((dim[0]*dim[1])!=matrix.length) throw 'Constructor: Dimension is not correct!';
-        for(var i=0;i<matrix.length; i++){if (typeof matrix[i]!='number') throw 'Constructor: Some elements is not a number!'}
+        if (typeof dim == 'number'){
+          var tmp = dim;
+          dim = [];
+          dim[0] = dim[1] = tmp;
+        }
+        if ((dim[0] * dim[1]) != matrix.length) throw 'Constructor: Dimension is not correct!';
+        for ( var i = 0, len = matrix.length; i < len; i++){
+          if (typeof matrix[i] != 'number') throw 'Constructor: Some elements is not a number!'
+        }
         this.matrix = matrix;
         this.dim    = dim;
         this.name   = name;
