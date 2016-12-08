@@ -2,6 +2,14 @@ var Matrix = (function(){
     // EXAMPLE:
     //      var arr = [0,0,0, 0,0,0, 0,0,3];
     //      var someMatrix = new Matrix(arr,[3,3],'example name');
+    /*
+        var a = Matrix.random(4,1,5);
+        a.print();
+        var arr = [1,2,3,4];
+        var b = new Matrix(arr,[1,4]);
+        console.log(Matrix.add(a,a).print());
+        console.log(Matrix.add(a,a).print());
+    */
     function Matrix(matrix, dim, name){
         dim = dim || [1,matrix.length];
         if (typeof dim == 'number'){
@@ -205,12 +213,3 @@ var Matrix = (function(){
     return Matrix;
 
 })();
-
-/*
-    var a = Matrix.random(4,1,5);
-    a.print();
-    var arr = [1,2,3,4];
-    var b = new Matrix(arr,[1,4]);
-    console.log(Matrix.add(a,a).print());
-    console.log(Matrix.add(a,a).print());
-*/
