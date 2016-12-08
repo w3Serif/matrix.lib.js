@@ -1,22 +1,5 @@
 var Matrix = (function(){
-    /*
-        EXAMPLE:
-        var arr = [0,0,0, 0,0,0, 0,0,3];
-        var someMatrix = new Matrix(arr,[3,3],'example name');
 
-        var a = Matrix.random(4,1,5);
-        a.print();
-        var arr = [1,2,3,4];
-        var b = new Matrix(arr,[1,4]);
-        console.log(Matrix.add(a,a).print());
-        console.log(Matrix.add(a,a).print());
-
-        // Usage:
-        var arr = [0,0,1, 0,0,2, 0,0,3];
-        var someMatrix = new Matrix(arr, 3,'Matrix A'); // 3 is short notation. Full notation: [3,3]
-        console.log(someMatrix.getElement(0,3)); // 0 - row, 3 - col => [1,2,3]
-        someMatrix.print(' ')
-    */
     function Matrix(matrix, dim, name){
         dim = dim || [1,matrix.length];
         if (typeof dim == 'number'){
@@ -205,13 +188,13 @@ var Matrix = (function(){
          * args {object}
          */
     };
-    Matrix.random    = function(dim,minVal,maxVal){
+    Matrix.random    = function(dim,minVal,maxVal,name){
         var arr = [];
         var sDim = dim*dim;
         for (var i=0;i<sDim;i++){
             arr.push(Math.floor(Math.random()*(maxVal-minVal+1))+minVal);
         }
-        return new Matrix(arr,dim);
+        return new Matrix(arr, dim, name);
     };
     Matrix.classOf   = function(arg){
         if(arg === null) return 'null';
