@@ -38,7 +38,7 @@ var Matrix = (function(){
                 this.matrix = n;
                 this.dim = [c,this.dim[0]];
             } else {
-                return new Matrix(n,[c,this.dim[0]]);
+                return new Matrix(n, [c, this.dim[0]], this.name);
             }
 
         },
@@ -50,7 +50,7 @@ var Matrix = (function(){
             }
         },
         getMCord: function(id){
-            return [Math.floor(id / this.dim[1])+1, id % this.dim[1] + 1];
+            return [Math.floor(id / this.dim[1]) + 1, id % this.dim[1] + 1];
         },
         /**
          * Select smome element/row/column from matrix
@@ -110,10 +110,8 @@ var Matrix = (function(){
 
         },
         makeOpposite: function(idelem){
-            console.log('was',this.matrix[idelem]);
             if (this.matrix[idelem] == 1) this.matrix[idelem] = 0;
             if (this.matrix[idelem] == 0) this.matrix[idelem] = 1;
-            console.log('new',this.matrix[idelem]);
         },
 		    // TODO:
         getDeterminant: function(){},
@@ -204,3 +202,8 @@ var Matrix = (function(){
 
     return Matrix;
 })();
+
+var arr = [0,0,1, 0,0,2, 0,0,3];
+var someMatrix = new Matrix(arr, 3,'Matrix A');
+console.log(someMatrix.getMCord(2));
+console.log(someMatrix.getElement(1,3));
