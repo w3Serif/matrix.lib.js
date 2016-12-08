@@ -9,13 +9,20 @@ var Matrix = (function(){
         var b = new Matrix(arr,[1,4]);
         console.log(Matrix.add(a,a).print());
         console.log(Matrix.add(a,a).print());
+
+        // Usage:
+        var arr = [0,0,1, 0,0,2, 0,0,3];
+        var someMatrix = new Matrix(arr, 3,'Matrix A'); // 3 is short notation. Full notation: [3,3]
+        console.log(someMatrix.getElement(0,3)); // 0 - row, 3 - col => [1,2,3]
+        someMatrix.print(' ')
     */
     function Matrix(matrix, dim, name){
         dim = dim || [1,matrix.length];
         if (typeof dim == 'number'){
-          var tmp = dim;
+          this.tmp = dim;
           dim = [];
-          dim[0] = dim[1] = tmp;
+          dim[0] = dim[1] = this.tmp;
+          delete this.tmp;
         }
         if ((dim[0] * dim[1]) != matrix.length) throw 'Constructor: Dimension is not correct!';
         for ( var i = 0, len = matrix.length; i < len; i++){
@@ -23,7 +30,7 @@ var Matrix = (function(){
         }
         this.matrix = matrix;
         this.dim    = dim;
-        this.name   = name;
+        this.name   = name || '';
         this.length = matrix.length;
     };
     Matrix.prototype = {
@@ -124,18 +131,18 @@ var Matrix = (function(){
             if (this.matrix[idelem] == 0) this.matrix[idelem] = 1;
             console.log('new',this.matrix[idelem]);
         },
-		// TODO:
+		    // TODO:
         getDeterminant: function(){},
         print: function(val){
-            var val = (val)?(val+'\n'):val || '';
+            val = val ? val+'\n' : '';
             var str=val;
             var ln = this.matrix.length;
             var c=this.dim[1];
-            for (var j=0;j<ln;j+=c){
+            for (var j = 0; j < ln; j += c){
                 var s='';
-                for(var i=0;i<c;i++){
-                    s = (this.matrix[i+j].toString().length==1)?' ':'';
-                    str+=s+this.matrix[i+j]+''+(((i+1)==c)?'\n':',');
+                for(var i = 0; i < c; i++){
+                    s = (this.matrix[i+j].toString().length == 1) ? ' ' : '';
+                    str += s + this.matrix[i+j] + '' + ((i + 1 ==c) ? '\n' : ',');
                 }
             }
             console.log(str);
@@ -145,19 +152,19 @@ var Matrix = (function(){
     Matrix.validator = function(args){
         var countArgs=arguments.length,
             i=0;
-        if (typeof arguments[0]=='string'){i=1;}
-        for (;i<countArgs-1;i++){
+        if (typeof arguments[0]=='string') i=1;
+        for (; i < countArgs-1; i++){
             if (!(arguments[i] instanceof Matrix)) throw 'Validator: element: [' + arguments[i] + '] is not available!';
             if (i==countArgs) break;
             switch (arguments[0]){
-                case 'sqr': if (arguments[i].dim[0]!=arguments[i].dim[1])    return false; break;
-                case 'dim': if (arguments[i].dim[0]!=arguments[i+1].dim[0]  || arguments[i].dim[1]!=arguments[i+1].dim[1]) return false; break;
-                case 'rxc': if (arguments[i].dim[1]!=arguments[i+1].dim[0]) throw 'Validator: Для умножения, число строк 1й матрицы должно быть равно числу столбцов 2й матрицы.'; break;
+                case 'sqr': if (arguments[i].dim[0] != arguments[i].dim[1]) return false;
+                case 'dim': if (arguments[i].dim[0] != arguments[i+1].dim[0]  || arguments[i].dim[1]!=arguments[i+1].dim[1]) return false;
+                case 'rxc': if (arguments[i].dim[1] != arguments[i+1].dim[0]) throw 'Validator: Для умножения, число строк 1й матрицы должно быть равно числу столбцов 2й матрицы.';
             }
         }
         return true;
     };
-    Matrix.add       = function(args){
+    Matrix.add       = function(args/*arr*/){
         var  m1 = arguments[0], m2 = arguments[1];
         if (this.validator(m1,m2)){
             if (!this.validator('dim',m1,m2)) throw 'Matrix.add: dimensions is not equaled!';
@@ -171,7 +178,7 @@ var Matrix = (function(){
     };
     Matrix.multiple  = function(m1,m2){
         function multipleVectors(v1,v2){
-//            if(!(classOf(v1)=='array' && classOf(v2)=='array')) throw 'MultipleVectors: need array Vector';
+           // if(!(classOf(v1)=='array' && classOf(v2)=='array')) throw 'MultipleVectors: need array Vector';
             var elem = 0;
             for (var i=0;i<v1.length;i++) elem+=v1[i]*v2[i];
             return elem;
@@ -205,11 +212,11 @@ var Matrix = (function(){
         }
         return new Matrix(arr,dim);
     };
-    Matrix.classOf = function(arg){
+    Matrix.classOf   = function(arg){
         if(arg === null) return 'null';
         if(arg === undefined) return 'undefined';
         return Object.prototype.toString.call(arg).slice(8,-1).toLowerCase();
     }
-    return Matrix;
 
+    return Matrix;
 })();
