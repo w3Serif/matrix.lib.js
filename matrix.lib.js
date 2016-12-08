@@ -202,8 +202,3 @@ var Matrix = (function(){
 
     return Matrix;
 })();
-
-var arr = [0,0,1, 0,0,2, 0,0,3];
-var someMatrix = new Matrix(arr, 3,'Matrix A');
-console.log(someMatrix.getMCord(2));
-console.log(someMatrix.getElement(1,3));
