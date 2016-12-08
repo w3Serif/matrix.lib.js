@@ -188,7 +188,7 @@ var Matrix = (function(){
          * args {object}
          */
     };
-    Matrix.random    = function(dim,minVal,maxVal,name){
+    Matrix.random    = function(dim,minVal,maxVal, name){
         var arr = [];
         var sDim = dim*dim;
         for (var i=0;i<sDim;i++){
