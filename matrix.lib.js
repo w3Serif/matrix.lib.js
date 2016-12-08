@@ -220,3 +220,9 @@ var Matrix = (function(){
 
     return Matrix;
 })();
+
+// Usage:
+var arr = [0,0,1, 0,0,2, 0,0,3];
+var someMatrix = new Matrix(arr, 3,'Matrix A'); // 3 is short notation. Full notation: [3,3]
+console.log(someMatrix.getElement(0,3)); // 0 - row, 3 - col => [1,2,3]
+someMatrix.print(' ')
