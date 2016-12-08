@@ -1,8 +1,9 @@
 var Matrix = (function(){
-    // EXAMPLE:
-    //      var arr = [0,0,0, 0,0,0, 0,0,3];
-    //      var someMatrix = new Matrix(arr,[3,3],'example name');
     /*
+        EXAMPLE:
+        var arr = [0,0,0, 0,0,0, 0,0,3];
+        var someMatrix = new Matrix(arr,[3,3],'example name');
+
         var a = Matrix.random(4,1,5);
         a.print();
         var arr = [1,2,3,4];
